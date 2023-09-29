@@ -1,16 +1,19 @@
+# Defining the Task type to represent a task entity with its properties
 type Task {
-  id: Int!
-  title: String!
-  done: Boolean!
+  id: Int!                    # An unique identifier for the task
+  title: String!              # The title or description of the task
+  done: Boolean!              # A flag to indicate if the task is completed or not
 }
 
+# The Query type defines the read operations our GraphQL API supports
 type Query {
-  tasks: [Task!]!
-  task(id: Int!): Task
+  tasks: [Task!]!             # Retrieve a list of all tasks. The '!' means it will always return a list (can be empty)
+  task(id: Int!): Task        # Fetch a specific task by its ID. Can return null if task not found
 }
 
+# The Mutation type defines the write operations our GraphQL API supports
 type Mutation {
-  addTask(title: String!, done: Boolean): Task!
-  updateTask(id: Int!, title: String, done: Boolean): Task
-  deleteTask(id: Int!): Boolean
+  addTask(title: String!, done: Boolean): Task!               # Add a new task. Only title is mandatory, done defaults to false
+  updateTask(id: Int!, title: String, done: Boolean): Task    # Update a task by its ID. Can modify title and/or done status
+  deleteTask(id: Int!): Boolean                               # Delete a task by its ID. Returns true if deletion was successful
 }
